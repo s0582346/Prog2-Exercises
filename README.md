@@ -1,5 +1,5 @@
 # Prog2 Exercises 
 
 
-### Woche 1
+### Week 1
 -**[MathLibraryApp](./MathLibraryApp):** 10/10
