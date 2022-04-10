@@ -1,7 +1,4 @@
-# Programmierung1 Übungen
+# Prog2 Exercises
 
-
-
-### Woche 3 
+### Woche 1
 -**[BinaerAusgabe](./BinaerAusgabe/BinaerAusgabe/Program.cs):** 10/10
-### Woche 10
