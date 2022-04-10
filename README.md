@@ -1,6 +1,6 @@
 # Prog2 Exercises
 
-In diesem Repo veröffentliche ich meine Lösungen zu den Übungsaufgaben des Moduls Programmieren 1 an der HTW-Berlin.
+In this rep i will be posting the solutions of the Exercises from programming 1 class of HTW-Berlin 
 
 ### Woche 1
 -**[MathLibraryApp](./MathLibraryApp):** 10/10
