@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,9 +13,8 @@ namespace MathLibrary
         public static readonly Vector YDir = new Vector(0, 1, 0);
         public static readonly Vector ZDir = new Vector(0, 0, 1);
 
+       
         public double Length { get => CalculateDistanceTo(Zero); }
-
-
         public Vector(double x = 0, double y = 0, double z = 0): base(x, y, z)
         {
         }
@@ -49,16 +48,11 @@ namespace MathLibrary
 
         public Vector CrossProduct(Vector b)
         {
-            double YZ = b.Z * Y;
-            double ZY = b.Y * Z;
-
-            double ZX = b.Z * X;
-            double XZ = b.X * Z;
-
-            double XY = b.X * Y;
-            double YX = b.Y * X;
-
-            return new Vector(YZ - ZY, ZX - XZ, XY - YX);
+            return new Vector(
+                Y * b.Z - Z * b.Y,
+                Z * b.X - X * b.Z,
+                X * b.Y - Y * b.X
+            );
         }
         public double DotProduct(Vector b)
         {
@@ -72,26 +66,8 @@ namespace MathLibrary
 
         public bool AreCollinear(Vector b, double tolerance = PointVectorBase.Tolerance)
         {
-            double result1 = X / b.X;
-            double result2 = Y / b.Y;
-            double result3 = Z / b.Z;
-
-            double tol1 = result1 - result2;
-            double tol2 = result2 - result3;
-            double tol3 = result1 - result3;
-
-            bool areCollinear = false;
-
-            if(result1 == result2 && result1 == result3)
-            {
-                if(tol1 < tolerance && tol2 < tolerance && tol3 < tolerance)
-                {
-                    areCollinear = true;
-                }
-            }
-
-            return areCollinear; 
-         
+            Vector cross = this.CrossProduct(b);
+            return Math.Abs(cross.X) <= tolerance && Math.Abs(cross.Y) <= tolerance && Math.Abs(cross.Z) <= tolerance;
         }
 
     }
