@@ -16,7 +16,7 @@ namespace GeometryLibrary
        public Vector Direction { get => EndPoint.AsVector().Subtract(StartPoint.AsVector()).Normalize(); }
 
        /// <summary>
-       /// Initializes a new line with give startpoint and endpoint
+       /// Initializes a new line with given startpoint and endpoint
        /// </summary>
        /// <param name="startPoint"></param>
        /// <param name="endPoint"></param>
