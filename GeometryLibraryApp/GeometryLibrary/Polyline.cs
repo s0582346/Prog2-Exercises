@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MathLibrary;
@@ -10,7 +10,7 @@ namespace GeometryLibrary
     /// </summary>
     public class Polyline : Curve
     {
-    
+
 
         private List<Point> _points = new List<Point>();
         public IReadOnlyList<Point> Points => _points.AsReadOnly();
@@ -20,19 +20,19 @@ namespace GeometryLibrary
         /// Proofs if the startpoint and the endpoint of the polyline matches
         /// </summary>
         /// <returns>True or false depending on if polyline is closed  </returns>
-        public bool IsClosed 
+        public bool IsClosed
         {
             get
             {
-                if(IsValid)
+                if (IsValid)
                 {
                     if ((_points.First().X == _points.Last().X) && (_points.First().Y == _points.Last().Y) && (_points.First().Z == _points.Last().Z))
                     {
                         return true;
                     }
                 }
-                return false; 
-            } 
+                return false;
+            }
         }
 
         /// <summary>
@@ -40,32 +40,44 @@ namespace GeometryLibrary
         /// </summary>
         /// <returns>True or false depending on if that´s the case</returns>
         public bool IsPlanar
-        { 
+        {
             get
             {
-                if (_points.Count >= 3)
+                if (_points.Count < 3)
                 {
-                    Vector firstNormalvec = new Vector(_points[0].AsVector()).Subtract(_points[1].AsVector()).Normalize().CrossProduct(new Vector(_points[1].AsVector()).Subtract(_points[2].AsVector()).Normalize());
-
-                    for (int j = 1; j < _points.Count - 2; j++)
-                    {
-
-                        Vector compareVec = new Vector(_points[j].AsVector()).Subtract(_points[j + 1].AsVector()).Normalize().CrossProduct(new Vector(_points[j + 1].AsVector()).Subtract(_points[j + 2].AsVector()).Normalize());
-                        if (!compareVec.AreCollinear(firstNormalvec))
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
-
+                    return false;
                 }
 
-                return false;
+                List<Vector> vectors = new List<Vector>();
+                for (int i = 1; i < _points.Count; i++)
+                {
+                    Point currentStart = _points[i - 1];
+                    Point currentEnd = _points[i];
+                    vectors.Add(CreateVectorBetweenPoints(currentStart, currentEnd));
+                }
 
+                List<Vector> crossProducts = new List<Vector>();
+                for (int i = 1; i < vectors.Count; i++)
+                {
+                    Vector currentCrossProduct = vectors[0].CrossProduct(vectors[i]);
+                    crossProducts.Add(currentCrossProduct);
+                }
+
+                bool allCrossProductsCollinear = true;
+                for (int i = 1; i < crossProducts.Count; i++)
+                {
+                    if (!crossProducts[0].AreCollinear(crossProducts[i]))
+                    {
+                        allCrossProductsCollinear = false;
+                        break;
+                    }
+                }
+
+                return allCrossProductsCollinear;
             }
+
+
         }
-       
-            
 
         /// <summary>
         /// Proofs if the given polyline has more than one point
@@ -85,12 +97,12 @@ namespace GeometryLibrary
                 }
             }
         }
-      
+
         /// <summary>
         /// Caculates the length between the points inside the polyline 
         /// </summary>
         /// <return>The total length between every point</return>
-        public override double Length 
+        public override double Length
         {
 
             get
@@ -102,7 +114,7 @@ namespace GeometryLibrary
                 }
                 return len;
             }
-        
+
         }
 
         /// <summary>
@@ -120,7 +132,7 @@ namespace GeometryLibrary
         /// <param name="index">place that the new point will have</param>
         /// <param name="newPoint">point to insert</param>
         public void InsertPoint(int index, Point newPoint)
-        { 
+        {
             _points.Insert(index, newPoint);
         }
 
@@ -131,7 +143,6 @@ namespace GeometryLibrary
         public void RemovePoint(int index)
         {
             _points.RemoveAt(index);
-
         }
 
         /// <summary>
@@ -142,6 +153,15 @@ namespace GeometryLibrary
         {
             _points = points.ToList();
         }
-    }   
-        
+
+
+        private Vector CreateVectorBetweenPoints(Point startPoint, Point endPoint)
+        {
+            double deltaX = endPoint.X - startPoint.X;
+            double deltaY = endPoint.Y - startPoint.Y;
+            double deltaZ = endPoint.Z - startPoint.Z;
+            return new Vector(deltaX, deltaY, deltaZ);
+        }
+    }
+
 }
