@@ -5,5 +5,7 @@
 -**[MathLibraryApp](./MathLibraryApp):** 10/10
 
 ## Week 2
-
 -**[GeometryLibraryApp](./GeometryLibraryApp):** 10/10
+
+## Week 3
+_**[GeometryEditorApp](./GeometryEditorApp):** 10/10
