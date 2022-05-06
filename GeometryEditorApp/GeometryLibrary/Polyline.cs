@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MathLibrary;
@@ -21,9 +21,9 @@ namespace GeometryLibrary
         {
             MathLibrary.Point[] poly = _points.ToArray();
 
-            for (int i = 0; i <= poly.Length - 1 ; i++)
+            for (int i = 0; i < poly.Length - 1 ; i++)
             {
-                g.DrawLine(DrawPen, (float)poly[0].X, (float)poly[0].Y, (float)poly[i].X, (float)poly[i].Y);
+                g.DrawLine(DrawPen, (float)poly[i].X, (float)poly[i].Y, (float)poly[i + 1].X, (float)poly[i + 1].Y);
             }
         }
 
