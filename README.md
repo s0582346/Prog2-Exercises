@@ -8,4 +8,4 @@
 -**[GeometryLibraryApp](./GeometryLibraryApp):** 10/10
 
 ## Week 3
-_**[GeometryEditorApp](./GeometryEditorApp):** 10/10
+-**[GeometryEditorApp](./GeometryEditorApp):** 10/10
