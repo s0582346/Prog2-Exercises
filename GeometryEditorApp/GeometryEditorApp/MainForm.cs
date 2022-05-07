@@ -30,16 +30,14 @@ namespace GeometryEditorApp
 
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e) //Line button 
         {
-            //Line button 
             math.Point p1 = new math.Point(100, 100);
             math.Point p2 = new math.Point(50, 100);
             Line l1 = new Line(p1, p2);
             l1.Draw(pictureBox1.CreateGraphics());
-
         }
-        private void toolStripButton2_Click_1(object sender, EventArgs e) // Circle button
+        private void toolStripButton2_Click_1(object sender, EventArgs e) //Circle button
         {
             math.Point normalVector = new math.Point(200, 200);
             math.Point centerPoint = new math.Point(200, 200);
@@ -49,7 +47,7 @@ namespace GeometryEditorApp
             c1.Draw(pictureBox1.CreateGraphics());
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e) // Polyline button 
+        private void toolStripButton3_Click(object sender, EventArgs e) //Polyline button 
         {
             math.Point p1 = new math.Point(50, 50);
             math.Point p2 = new math.Point(100, 100);
