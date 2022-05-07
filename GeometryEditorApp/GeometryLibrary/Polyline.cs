@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MathLibrary;
 using System.Drawing;
+using System.Threading;
 
 namespace GeometryLibrary
 {
@@ -17,13 +18,18 @@ namespace GeometryLibrary
 
         public IReadOnlyList<MathLibrary.Point> Points => _points.AsReadOnly();
 
+        /// <summary>
+        /// Draws a polyline with given points 
+        /// </summary>
+        /// <param name="g">variable from Graphics that allows us to call Drawline </param>
         public override void Draw(Graphics g)
         {
             MathLibrary.Point[] poly = _points.ToArray();
 
-            for (int i = 0; i < poly.Length - 1 ; i++)
+            for (int i = 0; i < poly.Length - 1; i++)
             {
-                g.DrawLine(DrawPen, (float)poly[i].X, (float)poly[i].Y, (float)poly[i + 1].X, (float)poly[i + 1].Y);
+                g.DrawLine(DrawPen, (float)poly[0].X, (float)poly[0].Y, (float)poly[i + 1].X, (float)poly[i + 1].Y);
+                Thread.Sleep(2000);
             }
         }
 
@@ -166,6 +172,13 @@ namespace GeometryLibrary
         {
             _points = points.ToList();
         }
+
+        /// <summary>
+        /// Create a vector between points by subtracting the endpoint with the startpoint
+        /// </summary>
+        /// <param name="startPoint">Point to be subtracted</param>
+        /// <param name="endPoint">Point to be subtracted</param>
+        /// <returns>A new vector</returns>
 
         private Vector CreateVectorBetweenPoints(MathLibrary.Point startPoint, MathLibrary.Point endPoint)
         {
