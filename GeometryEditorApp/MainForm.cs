@@ -30,14 +30,12 @@ namespace GeometryEditorApp
 
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e) // Line button 
         {
-            //Line button 
             math.Point p1 = new math.Point(100, 100);
             math.Point p2 = new math.Point(50, 100);
             Line l1 = new Line(p1, p2);
             l1.Draw(pictureBox1.CreateGraphics());
-
         }
         private void toolStripButton2_Click_1(object sender, EventArgs e) // Circle button
         {
@@ -51,14 +49,17 @@ namespace GeometryEditorApp
 
         private void toolStripButton3_Click(object sender, EventArgs e) // Polyline button 
         {
-            math.Point p1 = new math.Point(50, 50);
-            math.Point p2 = new math.Point(100, 100);
-            math.Point p3 = new math.Point(120, 50);
-            math.Point p4 = new math.Point(60, 40);
+           List<math.Point> points = new List<math.Point>();
 
-            math.Point[] points = { p1, p2, p3, p4};
-
-            Polyline poly = new Polyline(points);
+            for (int i = 0; i <= 10; i++)
+            {
+                Random val = new Random();
+                int randX = val.Next(-300, 500);
+                int randY = val.Next(-300, 500);
+                math.Point point = new math.Point(randX, randY);
+                points.Add(point);
+            }
+            Polyline poly = new Polyline(points.ToArray());
             poly.Draw(pictureBox1.CreateGraphics());
         }
 
